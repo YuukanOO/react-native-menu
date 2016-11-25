@@ -82,7 +82,7 @@ Methods:
 
 Props:
 
-*None*
+- `animated` -- True if you want the options container to be animated (default to false)
 
 ### Menu
 

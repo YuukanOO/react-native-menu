@@ -28,12 +28,13 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
     </ScrollView>
   );
 
-  const makeOptions = (options, { top, right }) => {
+  const makeOptions = (options, { top, right }, animated) => {
     const { optionsContainerStyle, renderOptionsContainer = defaultOptionsContainerRenderer} = options.props;
+    const Container = animated ? AnimatedOptionsContainer : View;
     return (
-      <AnimatedOptionsContainer style={[ styles.optionsContainer, optionsContainerStyle, { top, right }]}>
+      <Container style={[ styles.optionsContainer, optionsContainerStyle, { top, right }]}>
         { renderOptionsContainer(options) }
-      </AnimatedOptionsContainer>
+      </Container>
     );
   };
 
@@ -156,7 +157,7 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
       const { w: ownWidth, px: ownPX, py: ownPY } = this._ownMeasurements;
       const optionsTop = menuPY - ownPY;
       const optionsRight = ownWidth + ownPX - menuPX - menuWidth;
-      return makeOptions(options, { top: optionsTop, right: optionsRight });
+      return makeOptions(options, { top: optionsTop, right: optionsRight }, this.props.animated);
     },
 
     render() {
